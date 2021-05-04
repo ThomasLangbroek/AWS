@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 import os
+import os.path
 
-from aws_cdk import core as cdk
+from aws_cdk import (
+    core as cdk
+)
+
+from aws_cdk.core import (
+    Tags
+)
 
 # For consistency with TypeScript code, `cdk` is the preferred import name for
 # the CDK's core module.  The following line also imports it as `core` for use
@@ -10,6 +17,7 @@ from aws_cdk import core as cdk
 from aws_cdk import core
 
 from cdkworkshop.cdkworkshop_stack import CdkworkshopStack
+from cdkworkshop.ec2stack import EC2InstanceStack 
 
 
 app = core.App()
@@ -26,9 +34,16 @@ CdkworkshopStack(app, "CdkworkshopStack",
     # Uncomment the next line if you know exactly what Account and Region you
     # want to deploy the stack to. */
 
-    #env=core.Environment(account='123456789012', region='us-east-1'),
+    env=core.Environment(account='188666076078', region='eu-central-1'),
 
     # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
     )
+app = core.App()
+EC2InstanceStack(app, "EC2InstanceStack",
+env=core.Environment(account='188666076078', region='eu-central-1'),
+)
+
+#Tags.of(CdkworkshopStack).add("Thomas", "Test")
+Tags.of(app).add("Thomas", "Test2")
 
 app.synth()
